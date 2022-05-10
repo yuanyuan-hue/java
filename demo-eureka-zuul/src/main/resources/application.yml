@@ -1,0 +1,25 @@
+server:
+  port: 7007
+spring:
+  application:
+    name: api-gateway
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://server1:7000/eureka/,http://server2:7001/eureka/
+  instance:
+    hostname: localhost
+zuul:
+  routes:
+    e-p:      #e-p e-c是自己定义的
+      path: /e-p/**      #路径中含有e-p的，均转发到eureka-provider1
+      serviceId: eureka-provider1
+    e-c:
+      path: /e-c/**
+      serviceId: eureka-consumer1
+yxwfilter:
+  ip:
+    whitelist: 192.168.18.1
+    whitelistenabled: true
