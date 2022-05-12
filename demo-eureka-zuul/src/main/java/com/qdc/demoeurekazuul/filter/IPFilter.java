@@ -1,6 +1,5 @@
 package com.qdc.demoeurekazuul.filter;
 
-import com.netflix.servo.monitor.StepCounter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -14,9 +13,9 @@ import java.util.List;
 @Component
 public class IPFilter extends ZuulFilter {
     private String[] whitelist;
-    @Value("$(yxwfilter.ip.whitelist)")
+    @Value("${yxwfilter.ip.whitelist}")
     private String strIPWhitelist;
-    @Value("$(yxwfilter.ip.whitelistenabled)")
+    @Value("${yxwfilter.ip.whitelistenabled}")
     private String WhitelistEnabled;
     @Override
     public String filterType() {
@@ -57,7 +56,7 @@ public class IPFilter extends ZuulFilter {
             ctx.setResponseStatusCode(401);
             ctx.setSendZuulResponse(false);
             ctx.getResponse().setContentType("application/json;charset=UTF-8");
-            ctx.setResponseBody("{\"errrocode\":\"00001\",\"errmsg\":\"IpAddr is forbidden!["+ipAddr+"]\"}");
+            ctx.setResponseBody("{\"errrocode\":\"00001\", \"errmsg\": \"IpAddr is forbidden![" + ipAddr+ "]\"}");
 
         }
         return null;
