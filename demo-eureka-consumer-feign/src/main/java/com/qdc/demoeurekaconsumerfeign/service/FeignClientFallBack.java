@@ -1,5 +1,9 @@
 package com.qdc.demoeurekaconsumerfeign.service;
+
+import org.springframework.stereotype.Component;
+
 //这个类就是熔断器
+@Component
 public class FeignClientFallBack implements UserClient{
     @Override
     public String hello() {
